@@ -9,6 +9,8 @@ var fs = require('fs'),
     path = require('path'),
     EventEmitter = require('events').EventEmitter;
 
+var Constants = require('./util/constants');
+
 var Application = module.exports = {};
 
 var STATE_INITED  = 1,  // app has inited
@@ -27,4 +29,8 @@ Application.init = function(opts){
 
 Application.getServerId = function(){
   return this.get(Constants.RESERVED.SERVER_ID);
+};
+
+Application.get = function(setting){
+  return this.settings[setting];
 };
