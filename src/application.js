@@ -24,6 +24,10 @@ Application.init = function(opts){
   opts = opts || {};
   self.settings = {};
 
+  var base = opts.base || path.dirname(require.main.filename);
+  self.set(Constants.RESERVED.BASE, base, true);
+  self.event = new EventEmitter();  // event object to sub/pub events
+
   appUtil.defaultConfiguration(self);
 
   self.state = STATE_INITED;
@@ -38,8 +42,16 @@ Application.get = function(setting){
   return this.settings[setting];
 };
 
+Application.set = function(key, val){
+  this.settings[key] = val;
+  return this;
+};
+
 Application.loadConfigBaseApp = function(key, val, reload){
   var self = this;
+
+  var originPath = path.join(self.getBase(), val);
+  console.log(originPath)
 };
 
 Application.getBase = function(){
