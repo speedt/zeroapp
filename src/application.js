@@ -31,7 +31,7 @@ Application.init = function(opts){
   appUtil.defaultConfiguration(self);
 
   self.state = STATE_INITED;
-  console.log('[INFO ] [%s] app inited: %j'.green, new Date().getTime(), self.getServerId());
+  console.log('[INFO ] [%s] app initialized: %j'.green, new Date().getTime(), self.getServerId());
 };
 
 Application.getServerId = function(){
@@ -50,8 +50,13 @@ Application.set = function(key, val){
 Application.loadConfigBaseApp = function(key, val, reload){
   var self = this;
 
+  var env = self.get(Constants.RESERVED.ENV);
   var originPath = path.join(self.getBase(), val);
-  console.log(originPath)
+
+  var file = require(originPath);
+  file = file[env];
+
+  self.set(key, file);
 };
 
 Application.getBase = function(){
