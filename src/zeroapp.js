@@ -14,6 +14,10 @@ var ZeroApp = module.exports = {
   version: require('../package.json').version,
 };
 
+Object.defineProperty(ZeroApp, 'app', {
+  get: function(){ return self.app; }
+});
+
 var self = this;
 
 var load = function(path, name){
