@@ -9,7 +9,8 @@ var fs = require('fs'),
     path = require('path'),
     EventEmitter = require('events').EventEmitter;
 
-var Constants = require('./util/constants');
+var Constants = require('./util/constants'),
+    appUtil = require('./util/appUtil');
 
 var Application = module.exports = {};
 
@@ -23,6 +24,8 @@ Application.init = function(opts){
   opts = opts || {};
   self.settings = {};
 
+  appUtil.defaultConfiguration(self);
+
   self.state = STATE_INITED;
   console.log('[INFO ] [%s] app inited: %j'.green, new Date().getTime(), self.getServerId());
 };
@@ -33,4 +36,12 @@ Application.getServerId = function(){
 
 Application.get = function(setting){
   return this.settings[setting];
+};
+
+Application.loadConfigBaseApp = function(key, val, reload){
+  var self = this;
+};
+
+Application.getBase = function(){
+  return this.get(Constants.RESERVED.BASE);
 };

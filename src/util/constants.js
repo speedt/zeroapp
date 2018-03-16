@@ -14,7 +14,6 @@ module.exports = {
     AFTER_FILTER: '__afters__',
   },
   RESERVED: {
-    ALL: 'all',
     SERVER_ID: 'serverId',
     AFTER_START: 'afterStart',
     START: 'start',
@@ -23,5 +22,6 @@ module.exports = {
     ENV: 'env',
     ENV_PRO: 'production',
     ENV_DEV: 'development',
+    SERVER: 'server',
   }
 };
