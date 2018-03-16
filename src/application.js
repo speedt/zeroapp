@@ -22,7 +22,7 @@ Application.init = function(opts){
   self.settings = {};
 
   self.state = STATE_INITED;
-  console.log('[INFO ] [%s] app inited: %j'.green, utils.format(), self.getServerId());
+  console.log('[INFO ] [%s] app inited: %j'.green, new Date().getTime(), self.getServerId());
 };
 
 Application.getServerId = function(){
