@@ -5,7 +5,32 @@
  */
 'use strict';
 
-var colors = require('colors');
+var log4js = require('log4js'),
+    path = require('path'),
+    cwd = process.cwd();
+
+log4js.configure({
+  appenders: {
+    app: {
+      type: 'dateFile',
+      filename: path.join(cwd, 'logs', 'app'),
+      pattern: '.yyyy-MM-dd.log',
+      alwaysIncludePattern: true,
+      compress: true,
+    },
+    console: {
+      type: 'console'
+    }
+  },
+  categories: {
+    default: {
+      appenders: ['app', 'console'],
+      level: 'debug'
+    }
+  }
+});
+
+var logger = log4js.getLogger('app');
 
 var app = require('../../');
 
@@ -14,8 +39,8 @@ process.on('uncaughtException', function (err){
 });
 
 process.on('exit', function (code){
-  if(0 === code) return console.warn('[WARN ] [%s] process exit'.yellow, new Date().getTime());
-  console.error('[ERROR] [%s] process exit with code: %s'.red, new Date().getTime(), code);
+  if(0 === code) return logger.warn('process exit');
+  logger.error('process exit with code: %s', code);
 });
 
 app.createApp(null, function(){

@@ -9,6 +9,8 @@ var fs = require('fs'),
     path = require('path'),
     EventEmitter = require('events').EventEmitter;
 
+var logger = require('log4js').getLogger('application');
+
 var Constants = require('./util/constants'),
     appUtil = require('./util/appUtil');
 
@@ -31,7 +33,7 @@ Application.init = function(opts){
   appUtil.defaultConfiguration(self);
 
   self.state = STATE_INITED;
-  console.log('[INFO ] [%s] app initialized: %j'.green, new Date().getTime(), self.getServerId());
+  logger.info('inited: %j', self.getServerId());
 };
 
 Application.getServerId = function(){
